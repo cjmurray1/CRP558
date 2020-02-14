@@ -83,6 +83,14 @@ li.dropdown {
   <label for="augochlora">Augochlora pura</label>
 </form>
 
+	<p>Enter a number 1-5 to see the five bee families of Iowa.</p>
+  <label for="amount">Enter Number:</label>
+  <input type="text" id="beeFamilyNum" style="border: 1; font-weight: bold;" onChange="beeFamilyDisplay()" value="" size="4"/>
+</p>
+<div id="slider-range-max"></div>
+<br><br>
+<div id="beeFamilyName"></div>
+
 var beeFamily = ["Andrenidae", "Apidae", "Colletidae", "Halictidae", "Megachilidae"]
   console.log(beeFamily.length); 
   
