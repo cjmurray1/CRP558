@@ -83,14 +83,26 @@ li.dropdown {
   <label for="augochlora">Augochlora pura</label>
 </form>
 
-<p>Enter a number 1-5 to see the alphabetical order of bee families found in Iowa.</p>
-  <label for="amount">Enter Number:</label>
-  <input type="text" id="beeFamily" style="border: 1; font-weight: bold;" onChange="beeDisplay()" value="" size="4"/>
-</p>
+var beeFamily = ["Andrenidae", "Apidae", "Colletidae", "Halictidae", "Megachilidae"]
+  console.log(beeFamily.length); 
+  
+  function beeDisplay() {
+	  x = document.getElementById("beeFamilyNum").value;
+	  console.log("wrong: "+beeFamilyList[x]+",  correct: "+beeFamilyList[x-1]);
+	  document.getElementById("beeFamilyName").innerHTML = beeFamilyList[x-1];
+  } 
 
- var beeFamily = ["Andrenidae", "Apidae", "Colletidae", "Halictidae", "Megachilidae"]
-console.log(beeFamily.length)
- function beeDisplay() {
-	  x = document.getElementById("beeFamily").value;
-	  console.log("wrong: "+beeFamily[x]+",  correct: "+beeFamily[x-1]);
-	  document.getElementById("beeFamily").innerHTML = beeFamily[x-1];
+var bees at prairie strips = {
+   family: "Apidae",
+   genus: "Apis",
+   species: "mellifera",
+quantity: 39
+};
+
+if (day == 360) {
+  greeting = "Merry Christmas!!";
+} else {
+  greeting = "It's not Christmas yet!";
+}
+
+	
