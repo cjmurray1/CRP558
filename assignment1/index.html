@@ -89,7 +89,8 @@ li.dropdown {
 </p>
 
  var beeFamily = ["Andrenidae", "Apidae", "Colletidae", "Halictidae", "Megachilidae"]
- function countyDisplay() {
+console.log(beeFamily.length)
+ function beeDisplay() {
 	  x = document.getElementById("beeFamily").value;
 	  console.log("wrong: "+beeFamily[x]+",  correct: "+beeFamily[x-1]);
 	  document.getElementById("beeFamily").innerHTML = beeFamily[x-1];
