@@ -61,15 +61,57 @@ li.dropdown {
     <a href="javascript:void(0)" class="dropbtn">Exercises</a>
     <div class="dropdown-content">
       <a href="https://cjmurray1.github.io/CRP558/exercise2/">Exercise 2</a>
-      <a href="#">Exercise 3</a>
     </div>
   </li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Assignments</a>
     <div class="dropdown-content">
-      <a href="#">Assignment 1</a>
+      <a href="https://cjmurray1.github.io/CRP558/assignment1/">Assignment 1</a>
     </div>
   </li>
 </ul>
 
 <p> Here's a closer look at my research at Iowa State. </p>
+<p> First, let's check your bee knowledge! 
+    Which of the following is a bee species? </p>
+    <form>
+  <input type="radio" id="solidago" name="species" value="Solidago virgaurea">
+  <label for="solidago">Solidago virgaurea</label><br>
+  <input type="radio" id="tapinoma" name="species" value="tapinoma sessile">
+  <label for="tapinoma">Tapinoma sessile</label><br>
+  <input type="radio" id="augochlora" name="species" value="augochlora pura">
+  <label for="augochlora">Augochlora pura</label>
+</form>
+
+	<p>Enter a number 1-5 to see the five bee families of Iowa.</p>
+  <label for="amount">Enter Number:</label>
+  <input type="text" id="beeFamilyNum" style="border: 1; font-weight: bold;" onChange="beeFamilyDisplay()" value="" size="4"/>
+</p>
+<div id="slider-range-max"></div>
+<br><br>
+<div id="beeFamilyName"></div>
+
+<script>
+var beeFamily = ["Andrenidae", "Apidae", "Colletidae", "Halictidae", "Megachilidae"]
+  console.log(beeFamily.length); 
+  
+  function beeDisplay() {
+	  x = document.getElementById("beeFamilyNum").value;
+	  console.log("wrong: "+beeFamilyList[x]+",  correct: "+beeFamilyList[x-1]);
+	  document.getElementById("beeFamilyName").innerHTML = beeFamilyList[x-1];
+  } 
+
+var bees at prairie strips = {
+   family: "Apidae",
+   genus: "Apis",
+   species: "mellifera",
+quantity: 39
+};
+
+if (day == 360) {
+  greeting = "Merry Christmas!!";
+} else {
+  greeting = "It's not Christmas yet!";
+}
+
+</script>	
