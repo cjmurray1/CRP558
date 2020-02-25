@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta name="description" content="Exercise 5 Leaflet Practice">
+    <meta name="description" content="Exercise 6">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Exercise 5 - Leaflet</title>
@@ -64,17 +64,17 @@
         .dropdown:hover .dropdown-content {
             display: block;
                 }
-        
-         #map {
+        #map {
             width: 700px;
             height: 500px;
         }
         
     </style>
+
 </head>
     
 <body>
-<ul>
+    <ul>
   <li><a href="https://cjmurray1.github.io/CRP558/exercise1/">Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Exercises</a>
@@ -91,13 +91,12 @@
     </div>
   </li>
 </ul>
-        
 
 
     <div id='map'>
 
     <script>
-        var map = L.map('map').setView([42.0723, -93.6237], 10);
+        var map = L.map('map').setView([42.0723, -93.6237], 13);
 
        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -105,10 +104,11 @@
         id: 'mapbox/satellite-v9',
         tileSize: 512,
         zoomOffset: -1,
-        accessToken: 'pk.eyJ1IjoiY2ptdXJyYXkiLCJhIjoiY2s2dmZzNzcxMDFlaTNtbzh1dWFwdTZ3eSJ9.fC9gDSipRNxoZI0mXnN8NA'
+        accessToken: 'pk.eyJ1IjoiY2ptdXJyYXkiLCJhIjoiY2s3MjJ2ZmRmMGJ2MTNobndmZjJvcDlrcSJ9.jB-YBe7p4TnYVigxWxGvpw'
 }).addTo(map);
 
-        L.marker([42.0723, -93.6237]).addTo(map)
+        L.marker([42.0723, -93.6237]
+                ]).addTo(map)
             .bindPopup("Ada Hayden Heritage Park")
             .openPopup();
             
@@ -117,7 +117,16 @@
             fillColor: '#f03',
             fillOpacity: 0.25,
             radius: 1000
-        }).addTo(map);
+         }).addTo(map)
+        circle.bindPopup("1000m radius");
+            
+        var polygon = L.polygon([
+            [42.075128, -93.633936],
+            [42.075194, -93.630529],
+            [42.074645, -93.631435],
+            [42.073774, -93.634395]
+        ]).addTo(map)
+         polygon.bindPopup("Prairie restoration");
     </script>
 </div>
 </body>
