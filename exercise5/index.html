@@ -119,6 +119,15 @@ li.dropdown {
             fillOpacity: 0.25,
             radius: 1000
         }).addTo(map);
+           circle.bindPopup("1000m radius");
+            
+        var polygon = L.polygon([
+            [42.075128, -93.633936],
+            [42.075194, -93.630529],
+            [42.074645, -93.631435],
+            [42.073774, -93.634395]
+        ]).addTo(map)
+         polygon.bindPopup("Prairie restoration");
     </script>
 </div>
 </body>
