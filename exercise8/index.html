@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta namte="description" content-"CRP 558 Exercise 8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>GeoJSON in Leaflet</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+              integrity=""
+              crossorigin=""/>
+        <script src=""
+                integrity=""
+                crossorigin=""></script>
+        <script src="../geojsonEX8repo/"></script>
+        <script src="../geojsonEX8repo/"></script>
+            
+        <style>
+        #map {
+            width: 800px;
+            height: 500px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div id='map'></div>
+        
+        <script>
+            var map = L.map('map').setView([]);
+            
+            L.tilelayer(, {
+                attribution:
+                maxZoom:
+                id:
+                accessToken:
+            }).addTo(map);
+            
+            L.geoJSON(var name).addTo(map);
+            L.geoJSON(var name).addTo(map);
+            L.geoJSON(var name).addTo(map);
+        </script>
+        
+
+    </body>
+</html>
