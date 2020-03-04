@@ -34,6 +34,8 @@
         
         <script type="text/javascript" src="https://github.com/cjmurray1/CRP558/blob/master/geojson/obesityqgis.geojson"></script>
         
+        <script src="../geojson/illinois.geojson"></script>
+        
         <script type="text/javascript">
             
               var streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
@@ -68,7 +70,7 @@
             
             L.control.layers(baseLayers).addTo(map);
             
-    
+            L.geoJson(illinois) .addTo(map);
             
             function getColor(Percent_1) {
                 return Percent_1 > 32  ? '#2c7fb8' :
