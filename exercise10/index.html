@@ -128,6 +128,7 @@
                     click: zoomToFeature 
                 });
                 
+            }
             var legend = L.control({position: 'bottomright'});
 
         legend.onAdd = function (map) {
@@ -146,8 +147,7 @@
         };
 
                 legend.addTo(map);
-                });
-            
+                
             
             geojson = L.geoJson(obesity, {
                 style: style,
