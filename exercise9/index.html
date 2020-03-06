@@ -68,7 +68,12 @@
                 "Streets": streets
             };
             
-            L.control.layers(baseLayers).addTo(map);
+            var overlayMaps = {
+                "County Obesity Rate": obesity,
+                "State boundary": illinois
+            };
+            
+            L.control.layers(baseLayers, overlayMaps).addTo(map);
             
             L.geoJson(illinois).addTo(map);
             
