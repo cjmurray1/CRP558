@@ -96,7 +96,7 @@
         
             L.geoJson(obesity, {style: style}).addTo(map);
             
-            L.control.layers(baseLayers, overlayMaps).addTo(map);
+            
             
         function highlightFeature(County) {
             var layer = County.target;
@@ -137,7 +137,7 @@
                 onEachFeature: onEachFeature
             }).addTo(map);
             
-            
+            L.control.layers(baseLayers, overlayMaps).addTo(map);
             
         </script>
         
