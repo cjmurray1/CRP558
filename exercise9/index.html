@@ -73,7 +73,7 @@
                 "State boundary": illinois
             };
             
-            L.control.layers(baseLayers, overlayMaps).addTo(map);
+            
             
             L.geoJson(illinois).addTo(map);
             
@@ -96,6 +96,7 @@
         
             L.geoJson(obesity, {style: style}).addTo(map);
             
+            L.control.layers(baseLayers, overlayMaps).addTo(map);
             
         function highlightFeature(County) {
             var layer = County.target;
