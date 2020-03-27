@@ -16,8 +16,22 @@
              
              h1 {
                 color:  #333;
-            
+                font-family: sans-serif;
                  
+             }
+             .header {
+                background-color: lightgray;
+                padding: 20px;
+                text-align: center;
+                 max-width: 950px;
+                 opacity: 0.7;
+                
+                }
+             
+             p {
+                 color: #333;
+                 font-family: sans-serif;
+                 max-width: 1000px;
              }
              
              ul {
@@ -26,6 +40,7 @@
                  padding: 0;
                  overflow: hidden;
                 background-color: #333;
+                 max-width: 1000px;
              }
 
              li {
@@ -38,6 +53,7 @@
                 text-align: center;
                 padding: 14px 16px;
                 text-decoration: none;
+                 font-family: sans-serif;
              }
 
              li a:hover, .dropdown:hover .dropbtn {
@@ -72,7 +88,7 @@
              }
              
             #map {height: 600px;
-                  width: 900px; }
+                  width: 1000px; }
     </style>
     
     </head>
@@ -101,7 +117,9 @@
     
     <body>
     <!--Adding the short narrative about my project-->
-        <h1>Vermont Outdoors</h1>
+        <div class="header">
+            <h1>Vermont Outdoors</h1>
+        </div>
         
         <p>Vermont is nature-lover's dream getaway! Enjoy the Green Mountain National Forest's many hiking and biking trails including the Long Trail and the Appalachian Trail. Winter is the perfect time to visit Vermont's many downhill skiing hills as well! Over a quarter of the state's area is in national and state forests, which creates very sparsely populated counties.</p>
         
@@ -178,7 +196,6 @@
             L.geoJson(nestates).addTo(map);
             L.geoJson(vtpop).addTo(map);
             
-        
             
             map.attributionControl.addAttribution('Population data &copy; <a href="https://vcgi.vermont.gov/">Vermont Center for Geographic Information</a>');
             
