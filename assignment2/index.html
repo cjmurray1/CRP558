@@ -192,9 +192,34 @@
             
             L.control.layers(baseLayers, overlays).addTo(map);
             
-           
-            L.geoJson(nestates).addTo(map);
-            L.geoJson(vtpop).addTo(map);
+           var myStyle = {
+                "color": "#333",
+                "weight": 5,
+                "opacity": 0.6,
+               "fillColor": "#333",
+               "fillOpacity": 0
+};
+            L.geoJson(nestates, {style: myStyle}).addTo(map);
+            
+            function getColor(d) {
+                return d > 36000 ? '#2c7fb8' :
+                        d > 24000 ? '#41b6c4' :
+                        d > 16000 ? '#7fcdbb' :
+                        d > 6000 ? '#c7e9b4' :
+                                        '#fffcc'
+            }
+            
+            function style(feature) {
+                return {
+                    weight: 1,
+                    opacity: 1,
+                    color:'white',
+                    fillColor: getColor(feature.properties.P0030001)
+                };
+            }
+            
+            
+            L.geoJson(vtpop, {style: style}).addTo(map);
             
             
             map.attributionControl.addAttribution('Population data &copy; <a href="https://vcgi.vermont.gov/">Vermont Center for Geographic Information</a>');
