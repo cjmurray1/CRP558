@@ -12,7 +12,15 @@
                 integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
                 crossorigin=""></script>
         
-         <style>
+        
+        <script src="https://www.patrick-wied.at/static/heatmapjs/assets/js/heatmap.min.js"></script>
+        
+        <script src="https://www.patrick-wied.at/static/heatmapjs/assets/js/leaflet-heatmap.js"></script>
+        
+
+
+        
+        <style>
              
              h1 {
                 color:  #333;
@@ -112,13 +120,72 @@
     <body>
         
       <h1>Creating a HeatMap</h1>  
-        <p>In CRP 558, we have covered a couple of leaflet plugins that help build heatmaps. In this technology report, we will be digging a little bit deeper into data selection, alternate plugins, and overall design of heatmaps.</p>
+        <p>In CRP 558, we have covered one leaflet plugin that builds heatmaps, leaflet heat. In this technology report, we will be digging a little bit deeper into an alternate heatmap plugin for leaflet, the differences in data formatting, and customization of the heatmap design.</p>
         
     <h2>Heat Map Slides</h2>
+        
+        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRmxT3xBpxes_7H8gTK3ssLM8l4S3dUNBNqk7xHMlddMpI5b1t9izYdPIycrDyqX3LCBmD9ph3ZDwd1/embed?start=true&loop=false&delayms=10000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
     
-    <h2>Example Map</h2>
+    <h2>Example Map - Bald Eagle Sightings at Saylorville Lake 2/25/2020</h2>
+        <p>This map was created using the leaflet-heatmap.js plugin. I compiled this data based on counts of bald eagles while driving around the lake. Each count value was inputted in the data array as the intensity value.</p>
         
+        <div id="map"></div>
+        
+           <script type="text/javascript">
+               window.onload = function() {
+                   var eaglearray = {
+                       data: [{lat: 41.765659,lng: -93.736384, count: 1}, {lat: 41.763826, lng: -93.733058, count: 3}, {lat: 41.762658,lng: -93.732071,count: 2}, {lat:41.706032, lng: -93.673551,count: 1}, {lat: 41.697911,lng: -93.685903, count: 5}, {lat: 41.696004,lng: -93.684852, count: 6}, {lat: 41.695363, lng: -93.684155,count: 4}, {lat: 41.689604, lng: -93.679436, count:3}, {lat: 41.698179, lng: -93.675390,count: 3}]};
+                   
+               
+               
+              var streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+                        {id: 'mapbox/streets-v11',
+                         tileSize: 512,
+                         zoomOffset: -1,
+                         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                         accessToken: 'pk.eyJ1IjoiY2ptdXJyYXkiLCJhIjoiY2s3MjJ2ZmRmMGJ2MTNobndmZjJvcDlrcSJ9.jB-YBe7p4TnYVigxWxGvpw'});
+                  
+                   var cfg = {
+  // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+  // if scaleRadius is false it will be the constant radius used in pixels
+  "radius": 0.01,
+    "gradient": {
+    // enter n keys between 0 and 1 here
+    // for gradient color customization
+    '.3': 'white',
+    '.5': 'yellow',
+    '.8': 'blue',
+    '.95': 'red'},                    
+  "maxOpacity": .8,
+  // scales the radius based on map zoom
+  "scaleRadius": true,
+  // if set to false the heatmap uses the global maximum for colorization
+  // if activated: uses the data maximum within the current map boundaries
+  //   (there will always be a red spot with useLocalExtremas true)
+  "useLocalExtrema": false,
+  // which field name in your data represents the latitude - default "lat"
+  latField: 'lat',
+  // which field name in your data represents the longitude - default "lng"
+  lngField: 'lng',
+  // which field name in your data represents the data value - default "value"
+  valueField: 'count'
+};
 
+
+var heatmapLayer = new HeatmapOverlay(cfg);
+
+var map = new L.Map('map', {
+  center: new L.LatLng(41.706032, -93.673551),
+  zoom: 12,
+  layers: [streets, heatmapLayer]
+});
+
+heatmapLayer.setData(eaglearray);
+
+               }
+              
+               
         
+        </script>
     </body>
         </html>
