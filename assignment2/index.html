@@ -4,14 +4,14 @@
         <title>LA CRP 558 Assignment 2</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width">
-        
+    <!--source code for leaflet maps and styling-->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
                integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
                crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
                 integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
                 crossorigin=""></script>
-        
+        <!--adding CSS to my headings, navigation bar, and map-->
          <style>
              
              h1 {
@@ -128,6 +128,7 @@
         <div class="dropdown-content">
             <a href="https://cjmurray1.github.io/CRP558/assignment1/">Assignment 1</a>
             <a href="https://cjmurray1.github.io/CRP558/assignment2/">Assignment 2</a>
+            <a href="https://cjmurray1.github.io/CRP558/technology_report/">Technology Report</a>
         </div>
         </li>
     </ul>
@@ -157,7 +158,7 @@
                 </div>
             </div>
         </div>
-        
+      <!--Sourcing all of my geojson files for layers-->  
         <script src="https://cjmurray1.github.io/CRP558/geojson/VT_greenmountain_trails.geojson"></script>
         <script src="https://cjmurray1.github.io/CRP558/geojson/VT_DownhillSki.geojson">
         </script>
@@ -168,7 +169,7 @@
         
         <script type="text/javascript">
             
-            
+         //creating basemap tile layers   
               var streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
                         {id: 'mapbox/streets-v11',
                          tileSize: 512,
@@ -193,7 +194,7 @@
                 layers: [streets,satellite]
             
             });
-            
+        //setting the stage for layer control    
             var baseLayers = {
                 "Satellite": satellite,
                 "Streets": streets
@@ -213,7 +214,7 @@
             
             L.control.layers(baseLayers, overlays).addTo(map);
             
-            
+         //adding some formatting to my layers   
            var myStyle = {
                 "color": "#333",
                 "weight": 5,
@@ -222,7 +223,7 @@
                "fillOpacity": 0
 };
             L.geoJson(nestates, {style: myStyle}).addTo(map);
-            
+          //setting up chloropleth map formatting  
             function getColor(d) {
                 return d > 40000 ? '#2c7fb8' :
                         d > 30000 ? '#41b6c4' :
@@ -258,7 +259,7 @@
                 layer.bringToFront();
             }
         }
-            
+         //coding javascript for button click/zoom function   
             var geojson;
             
             function resetHighlight(County) {
@@ -277,6 +278,7 @@
                 });
                 
             }
+            //adding the legend
             var legend = L.control({position: 'bottomright'});
 
         legend.onAdd = function (map) {
@@ -303,7 +305,7 @@
                 onEachFeature: onEachFeature
             }).addTo(map);
             
-            
+         //data attribution located in the map   
             map.attributionControl.addAttribution('Population data &copy; <a href="https://vcgi.vermont.gov/">Vermont Center for Geographic Information</a>');
             
         </script>
