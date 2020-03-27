@@ -138,7 +138,7 @@
             <h1>Vermont Outdoors</h1>
         </div>
         
-        <p>Vermont is nature-lover's dream getaway! Enjoy the Green Mountain National Forest's many hiking and biking trails including the Long Trail and the Appalachian Trail. Winter is the perfect time to visit Vermont's many downhill skiing hills as well! Over a quarter of the state's area is in national and state forests, which creates very sparsely populated counties.</p>
+        <p>Vermont is nature-lover's dream getaway! Enjoy the Green Mountain National Forest's many hiking trails including the Long Trail and the Appalachian Trail. Winter is the perfect time to visit Vermont's many downhill skiing hills as well! Over a quarter of the state's area is in national and state forests, which creates very sparsely populated counties. Counties are delineated on the map by population size.</p>
         
      <!--Adding the image-->   
         <p><img src="../images/longtrail.jpeg" width="327" height="154" alt="long trail">
@@ -202,15 +202,17 @@
             
             var trails = L.geoJSON(trails, {color:'black'}).addTo(map);
             var vtski = L.geoJSON(vtski).addTo(map);
-            var neforests = L.geoJSON(neforests, {color:'darkgreen').addTo(map);
+            var neforests = L.geoJSON(neforests, {color:'darkgreen'}).addTo(map);
+            
             
             var overlays = {
                 "Hiking Trails": trails,
                 "Downhill Ski Mountains": vtski,
-                "Northeastern National Forests": neforests
+                "Northeastern National Forests": neforests,
             };
             
             L.control.layers(baseLayers, overlays).addTo(map);
+            
             
            var myStyle = {
                 "color": "#333",
@@ -222,8 +224,8 @@
             L.geoJson(nestates, {style: myStyle}).addTo(map);
             
             function getColor(d) {
-                return d > 36000 ? '#2c7fb8' :
-                        d > 24000 ? '#41b6c4' :
+                return d > 40000 ? '#2c7fb8' :
+                        d > 30000 ? '#41b6c4' :
                         d > 16000 ? '#7fcdbb' :
                         d > 6000 ? '#c7e9b4' :
                                         '#fffcc'
@@ -280,7 +282,7 @@
         legend.onAdd = function (map) {
 
             var div = L.DomUtil.create('div', 'info legend'),
-                grades = [0, 6000, 16000, 24000, 36000],
+                grades = [0, 6000, 16000, 30000, 40000],
                 labels = ["County Population"];
 
             for (var i = 0; i < grades.length; i++) {
