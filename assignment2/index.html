@@ -89,6 +89,22 @@
              
             #map {height: 600px;
                   width: 1000px; }
+             .legend {
+                line-height: 18px;
+                color: #333;
+             }
+            .legend i {
+                width: 18px;
+                height: 18px;
+                float: left;
+                margin-right: 8px;
+                opacity: 0.9;
+            }
+             .info {
+                background: white;
+                box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                border-radius: 5px;
+             }
     </style>
     
     </head>
@@ -184,9 +200,9 @@
             };
 
             
-            var trails = L.geoJSON(trails).addTo(map);
+            var trails = L.geoJSON(trails, {color:'black'}).addTo(map);
             var vtski = L.geoJSON(vtski).addTo(map);
-            var neforests = L.geoJSON(neforests).addTo(map);
+            var neforests = L.geoJSON(neforests, {color:'darkgreen').addTo(map);
             
             var overlays = {
                 "Hiking Trails": trails,
@@ -224,6 +240,66 @@
             
             
             L.geoJson(vtpop, {style: style}).addTo(map);
+            
+             function highlightFeature(County) {
+            var layer = County.target;
+            
+            layer.setStyle({
+                weight: 2,
+                color: 'black',
+                dashArray: '',
+                fillOpacity: 0.8
+            
+            });
+            
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+        }
+            
+            var geojson;
+            
+            function resetHighlight(County) {
+                geojson.resetStyle(County.target);
+            }
+            
+            function zoomToFeature(County) {
+                map.fitBounds(County.target.getBounds());
+            }
+            
+            function onEachFeature(feature, layer) {
+                layer.on({
+                    mouseover: highlightFeature,
+                    mouseout: resetHighlight,
+                    click: zoomToFeature 
+                });
+                
+            }
+            var legend = L.control({position: 'bottomright'});
+
+        legend.onAdd = function (map) {
+
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = [0, 6000, 16000, 24000, 36000],
+                labels = ["County Population"];
+
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+            return div;
+        };
+
+                legend.addTo(map);
+            
+                
+            
+            geojson = L.geoJson(vtpop, {
+                style: style,
+                onEachFeature: onEachFeature
+            }).addTo(map);
             
             
             map.attributionControl.addAttribution('Population data &copy; <a href="https://vcgi.vermont.gov/">Vermont Center for Geographic Information</a>');
