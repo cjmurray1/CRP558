@@ -4,6 +4,17 @@
     <title>Exercise 11</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width">
+    
+       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+               crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                crossorigin=""></script>
+    
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+    
+    
     <style>
         h1 {
                 color:  #333;
@@ -113,6 +124,8 @@
     
 <body>
     
+    <div id='map'></div>
+    
     <script>
         var naip_2019_nc = 
             L.tileLayer.wms("https://athene.gis.iastate.edu/arcgis/services/ortho/naip_2019_nc/ImagesServer/WMSServer", {
@@ -121,7 +134,7 @@
                 transparent: true,
                 attribution: "Iowa State University GIS Facility &copy; 2020, USDA Natinoal Agriculture Imagery Program 2019"
             });
-            })
+            
     
     
     </script>
