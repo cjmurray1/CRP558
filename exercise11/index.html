@@ -5,14 +5,16 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width">
     
-       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-               crossorigin=""/>
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-                crossorigin=""></script>
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
     
-    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+        <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+
+    
     
     
     <style>
@@ -122,19 +124,69 @@
         </li>
     </ul>
     
-<body>
+<body onload=init()>
+        <div id="map"
+            style="position:relative"; top:10px;>
+            <div class="leaflet-control-container">
+                <div class="leaflet-top leaflet-right">
+                    <div class="leaflet-control-layers leaflet-control" aria-haspopup="true"==$0>
+                        <a class="leaflet-control-layers-toggle", href="#" title="Layers">
+                        </a>
+                        <section class="leaflet-control-layers-list">
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
     
-    <div id='map'></div>
     
-    <script>
-        var naip_2019_nc = 
-            L.tileLayer.wms("https://athene.gis.iastate.edu/arcgis/services/ortho/naip_2019_nc/ImagesServer/WMSServer", {
-                layers: 'naip_2019_nc',
+    
+    
+        <script type="text/javascript">
+           function init() {
+               var streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+                        {id: 'mapbox/streets-v11',
+                         tileSize: 512,
+                         zoomOffset: -1,
+                         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                         accessToken: 'pk.eyJ1IjoiY2ptdXJyYXkiLCJhIjoiY2s3MjJ2ZmRmMGJ2MTNobndmZjJvcDlrcSJ9.jB-YBe7p4TnYVigxWxGvpw'}),
+                    satellite   = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', 
+                        {id: 'mapbox/satellite-v9', 
+                         tileSize: 512,
+                         zoomOffset: -1, 
+                         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                        accessToken: 'pk.eyJ1IjoiY2ptdXJyYXkiLCJhIjoiY2s3MjJ2ZmRmMGJ2MTNobndmZjJvcDlrcSJ9.jB-YBe7p4TnYVigxWxGvpw'
+                        });
+             
+            
+           var ortho1970 = L.tileLayer.wms("https://ortho.gis.iastate.edu/arcgis/services/ortho/ortho_1970/ImageServer/WMSServer", {
+                layers: 'ortho_1970',
                 format: 'image/png',
                 transparent: true,
-                attribution: "Iowa State University GIS Facility &copy; 2020, USDA Natinoal Agriculture Imagery Program 2019"
+                attribution: "Iowa State University GIS Facility &copy; 2020"
             });
+               
+                  var baseMaps = {
+                    "Satellite": satellite,
+                    "Streets": streets,
+                    "1970": ortho1970
+                    };
+
+               var map = L.map('map', {
+                    center:[41.725134, -93.693042],
+                    zoom:12,
+                    layers: [ortho1970, satellite, streets]
+                }); 
+           
+        
+     var baseLayers = {"Satellite": satellite,
+                    "Streets": streets,
+                    "1970":ortho1970
+                };
+                    
+                L.control.layers(baseLayers).addTo(map);
             
+        }
     
     
     </script>
