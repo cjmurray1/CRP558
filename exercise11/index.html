@@ -12,7 +12,7 @@
    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
    crossorigin=""></script>
     
-        <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+        
 
     
     
@@ -124,6 +124,10 @@
         </li>
     </ul>
     
+    <h1>Exercise 11</h1>
+    <h2>Leaflet Plugin</h2>
+    <p>In this exercise, I have added a kml file overlay to a WMS tilelayer map from the Iowa Ortho Server. In addition, the basemap can be toggled to two additional leaflet maps.</p>
+    
 <body onload=init()>
         <div id="map"
             style="position:relative"; top:10px;>
@@ -140,7 +144,7 @@
         </div>
     
     
-    
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
     
         <script type="text/javascript">
            function init() {
@@ -174,12 +178,13 @@
 
                var map = L.map('map', {
                     center:[41.725134, -93.693042],
-                    zoom:12,
+                    zoom:13,
                     layers: [ortho1970, satellite, streets]
                 }); 
            
+               var sp = omnivore.kml("spunit.kml") .addTo(map);
         
-     var baseLayers = {"Satellite": satellite,
+               var baseLayers = {"Satellite": satellite,
                     "Streets": streets,
                     "1970":ortho1970
                 };
@@ -187,6 +192,9 @@
                 L.control.layers(baseLayers).addTo(map);
             
         }
+                
+    
+   
     
     
     </script>
