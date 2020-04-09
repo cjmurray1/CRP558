@@ -1,1 +1,151 @@
+<!doctype html>
+<html>
+<head>
+    <title>Exercise 12</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width">
+    
+             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+                integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+                crossorigin=""/>
+            <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                crossorigin=""></script>
+    
+    
+    
+    <style>
+        h1 {
+                color:  #333;
+                font-family: sans-serif;
+                 
+             }
+            h2 {
+                color: #7fcdbb;
+                font-family: sans-serif;
+            }
+             .header {
+                background-color: lightgray;
+                padding: 20px;
+                text-align: center;
+                 max-width: 960px;
+                 opacity: 0.7;
+                
+                }
+             
+             p {
+                 color: #333;
+                 font-family: sans-serif;
+                 max-width: 800px;
+             }
+             
+             ul {
+                list-style-type: none;
+                 margin: 0;
+                 padding: 0;
+                 overflow: hidden;
+                background-color: #333;
+                 max-width: 800px;
+             }
 
+             li {
+                float: left;
+             }
+
+             li a, .dropbtn {
+                display: inline-block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                 font-family: sans-serif;
+             }
+
+             li a:hover, .dropdown:hover .dropbtn {
+                background-color: red;
+             }
+
+             li.dropdown {
+                display: inline-block;
+            }
+
+             .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+             }
+
+             .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+             }
+
+             .dropdown-content a:hover {background-color: #f1f1f1;}
+
+             .dropdown:hover .dropdown-content {
+                display: block;
+             }
+        #map {height: 600px;
+              width: 800px; }
+    </style>
+ 
+</head>
+    
+    <ul>
+        <li><a href="https://cjmurray1.github.io/CRP558/exercise1/">Home</a></li>
+            <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Exercises</a>
+          <div class="dropdown-content">
+            <a href="https://cjmurray1.github.io/CRP558/exercise2/">Exercise 2</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise5/">Exercise 5</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise6/">Exercise 6</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise7/">Exercise 7</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise8/">Exercise 8</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise9/">Exercise 9</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise10/">Exercise 10</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise11/">Exercise 11</a>
+         </div>
+        </li>
+            <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Assignments</a>
+        <div class="dropdown-content">
+            <a href="https://cjmurray1.github.io/CRP558/assignment1/">Assignment 1</a>
+            <a href="https://cjmurray1.github.io/CRP558/assignment2/">Assignment 2</a>
+            <a href="https://cjmurray1.github.io/CRP558/technology_report/">Technology Report</a>
+        </div>
+        </li>
+    </ul>
+    
+    <body>
+        <h1>Exercise 12</h1>
+        <h2>Alterations to Mapbox Original Style</h2>
+        <p>For my custom tile layer, I chose the 'Outdoors' tile as my template. I then changed the colors of water, green space, and labels. I also changed the visibility of road sign shield (like interstate numbers). In addition, I removed the icons of points of interest, but kept the text. One of the defining parts of the Outdoors template is the inclusion of topographical lines, so I change the units from meters to feet to help comprehension by American viewers.
+        
+        I added a KML file of the 2014 list of Impaired Streams of Iowa to my custom layer. I styled the lines to have a complementary color to the "natural landforms" color scheme that I developed earlier. </p>
+        
+        <div id='map'>
+        </div>
+        <script>
+            
+        var map = L.map('map').setView([41.725134, -93.693042], 12);
+        
+        L.tileLayer('https://api.mapbox.com/styles/v1/cjmurray/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'ck8t9s1mw02us1iqyt6ddrv12',
+        accessToken: 'pk.eyJ1IjoiY2ptdXJyYXkiLCJhIjoiY2s2dmZsYzJtMDFjMDNkcWttdmdram9yaSJ9.CBzvTF94o8rvG2lbRPjC-w' 
+        }).addTo(map);
+
+
+            
+            
+        </script>
+        
+    
+    </body>
