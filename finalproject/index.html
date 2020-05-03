@@ -316,7 +316,7 @@
                         onEachFeature: milesOnEachFeatureFunction}).addTo(map);
             function milesOnEachFeatureFunction (feature, layer){
                 if (feature.properties.Mile_Marker) {
-                    layer.bindPopup(feature.properties.Mile_Marker),
+                    layer.bindPopup("Mile " + feature.properties.Mile_Marker),
                     layer.on({click: zoomToFeature});
                 }
             }
