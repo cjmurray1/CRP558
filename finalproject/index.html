@@ -20,7 +20,7 @@
                  
              }
              .header {
-                background-color: lightgray;
+                background-color: #f9f9f9;
                 padding: 20px;
                 text-align: center;
                  max-width: 960px;
@@ -164,8 +164,14 @@
                 For information on trail closures, click <a href="https://cjmurray1.github.io/CRP558/trail_closures/">here</a>.</span></marquee>
             </div>
         
-        <h1>Saylorville Lake Hiking Trails</h1>
+        <div class="header">
+            <h1>Saylorville Lake Hiking Trails</h1>
+        </div>
+        
         <p>Saylorville Lake is well known for its recreational value in the Des Moines Area, where it sees over 2 million visitors annually. Saylorville has four campgrounds, a disc golf course, four boat ramps, the 26 mile long Neal Smith trail and numerous picnic shelters. In addition, Saylorville is home to several hiking trails.</p>
+        
+        
+        <!--Photo gallery CSS-->
         <div class="gallery">
             <a target="_blank" href="NSTsign.jpeg">
                 <img src="NSTsign.jpeg" alt="Neal Smith Trail sign" width="600" height="400">
@@ -194,6 +200,7 @@
         <div class="desc">Visitor Center Trailhead</div>
         </div>
      
+    <!--Map container-->
         <div id='map'>
         <div class="leaflet-control-container">
                 <div class="leaflet-top leaflet-right">
@@ -214,10 +221,11 @@
         <script src="https://cjmurray1.github.io/CRP558/geojson/VC_HikingTrail.geojson"></script>
         <script src="https://cjmurray1.github.io/CRP558/geojson/SandpiperHikingTrail.geojson"></script>
         <script src="https://cjmurray1.github.io/CRP558/geojson/NST_Mile_Markers.geojson"></script>
+        <script src="https://cjmurray1.github.io/CRP558/geojson/Neal_Smith_Trail.geojson"></script>
         
         <script>
             
-        var map = L.map('map').setView([41.725134, -93.693042], 12);
+        var map = L.map('map').setView([41.725134, -93.693042], 13);
         
         L.tileLayer('https://api.mapbox.com/styles/v1/cjmurray/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -226,10 +234,55 @@
         accessToken: 'pk.eyJ1IjoiY2ptdXJyYXkiLCJhIjoiY2s2dmZsYzJtMDFjMDNkcWttdmdram9yaSJ9.CBzvTF94o8rvG2lbRPjC-w' 
         }).addTo(map);
             
-
+            var geojsonMarkerOptions = {
+                radius: 6,
+                fillColor: "#2b8cbe",
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            };
+        
 
             
+            var PFtrails = L.geoJSON(PFtrails, {color:'#1c9099'}).addTo(map);
+            var SPtrail = L.geoJSON(SPtrail, {color:'#ece2f0',
+                        onEachFeature: yourOnEachFeatureFunction
+                                             }).addTo(map);
+
+            function yourOnEachFeatureFunction(feature, layer){
+            if (feature.properties.Length) {
+                layer.bindPopup(feature.properties.Length);}}
+    
+            var VCtrails = L.geoJSON(VCtrails, {color:'#a6bddb', 
+                    onEachFeature: yourOnEachFeatureFunction
+                    }).addTo(map);
+
+            function yourOnEachFeatureFunction(feature, layer){
+            if (feature.properties.Difficulty) {
+                layer.bindPopup(feature.properties.Difficulty);}}
             
+            var nealsmith = L.geoJSON(nealsmith, {
+                pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojsonMarkerOptions);
+                }}).addTo(map);
+            
+            var nstmiles = L.geoJSON(nstmiles, {pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, geojsonMarkerOptions);
+                        }}).addTo(map);
+
+            
+            var overlays = {
+                "Prairie Flower Recreation Area": PFtrails,
+                "Sandpiper Recreation Area": SPtrail,
+                "Visitor Center": VCtrails,
+                "Neal Smith Trail": nealsmith,
+                "Neal Smith Trail Mile Markers": nstmiles
+            };
+            
+            L.control.layers(overlays).addTo(map);
+            
+    
         </script>
       
     </body>
