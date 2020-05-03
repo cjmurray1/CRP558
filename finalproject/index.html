@@ -1,1 +1,236 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Final Project</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width">
+    <!--source code for leaflet maps and styling-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+               crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                crossorigin=""></script>
+        <!--adding CSS to my headings, navigation bar, and map-->
+         <style>
+             
+             h1 {
+                color:  #333;
+                font-family: sans-serif;
+                 
+             }
+             .header {
+                background-color: lightgray;
+                padding: 20px;
+                text-align: center;
+                 max-width: 960px;
+                 opacity: 0.7;
+                
+                }
+             
+             p {
+                 color: #333;
+                 font-family: sans-serif;
+                 max-width: 1000px;
+             }
+             
+             ul {
+                list-style-type: none;
+                 margin: 0;
+                 padding: 0;
+                 overflow: hidden;
+                background-color: #333;
+                 max-width: 1000px;
+             }
 
+             li {
+                float: left;
+             }
+
+             li a, .dropbtn {
+                display: inline-block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                 font-family: sans-serif;
+             }
+
+             li a:hover, .dropdown:hover .dropbtn {
+                background-color: red;
+             }
+
+             li.dropdown {
+                display: inline-block;
+            }
+
+             .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+             }
+
+             .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+             }
+
+             .dropdown-content a:hover {background-color: #f1f1f1;}
+
+             .dropdown:hover .dropdown-content {
+                display: block;
+             }
+             
+            #map {height: 600px;
+                  width: 1000px; }
+             .legend {
+                line-height: 18px;
+                color: #333;
+             }
+            .legend i {
+                width: 18px;
+                height: 18px;
+                float: left;
+                margin-right: 8px;
+                opacity: 0.9;
+            }
+             .info {
+                background: white;
+                box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                border-radius: 5px;
+             }
+             div.gallery {
+                 margin: 5px;
+                 border: 1px solid #ccc;
+                 float: left;
+                 width: 240px;
+            }
+
+             div.gallery:hover {
+                border: 2px solid #333;
+            }
+
+             div.gallery img {
+                width: 100%;
+                height: auto;
+            }
+
+             div.desc {
+                padding: 10px;
+                text-align: center;
+                font-family: sans-serif
+             }
+    </style>
+    
+    </head>
+<!--Adding the content for my navigation bar-->
+    <ul>
+        <li><a href="https://cjmurray1.github.io/CRP558/exercise1/">Home</a></li>
+            <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Exercises</a>
+          <div class="dropdown-content">
+            <a href="https://cjmurray1.github.io/CRP558/exercise2/">Exercise 2</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise5/">Exercise 5</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise6/">Exercise 6</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise7/">Exercise 7</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise8/">Exercise 8</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise9/">Exercise 9</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise10/">Exercise 10</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise11/">Exercise 11</a>
+            <a href="https://cjmurray1.github.io/CRP558/exercise12/">Exercise 12</a>
+         </div>
+        </li>
+            <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Assignments</a>
+        <div class="dropdown-content">
+            <a href="https://cjmurray1.github.io/CRP558/assignment1/">Assignment 1</a>
+            <a href="https://cjmurray1.github.io/CRP558/assignment2/">Assignment 2</a>
+            <a href="https://cjmurray1.github.io/CRP558/technology_report/">Technology Report</a>
+        </div>
+        </li>
+    </ul>
+    
+    <body>
+        <div align="center">
+            <marquee behavior="alternate" bgcolor="#bb3434" direction="left" height:="" 
+            loop="7" scrollamount="1" scrolldelay="1" width="100%">
+            <span style="font-family: sans-serif; font-size: 20px;color:#FFFFFF">
+                For information on trail closures, click <a href="https://cjmurray1.github.io/CRP558/trail_closures/">here</a>.</span></marquee>
+            </div>
+        
+        <h1>Saylorville Lake Hiking Trails</h1>
+        <p>Saylorville Lake is well known for its recreational value in the Des Moines Area, where it sees over 2 million visitors annually. Saylorville has four campgrounds, a disc golf course, four boat ramps, the 26 mile long Neal Smith trail and numerous picnic shelters. In addition, Saylorville is home to several hiking trails.</p>
+        <div class="gallery">
+            <a target="_blank" href="NSTsign.jpeg">
+                <img src="NSTsign.jpeg" alt="Neal Smith Trail sign" width="600" height="400">
+            </a>
+        <div class="desc">Mile 11.25 of the Neal Smith Trail</div>
+        </div>
+
+        <div class="gallery">
+            <a target="_blank" href="PFtrailsunset.jpeg">
+                <img src="PFtrailsunset.jpeg" alt="Praire Flower Trail" width="600" height="400">
+            </a>
+        <div class="desc">View from the Prairie Flower hiking trails</div>
+        </div>
+
+        <div class="gallery">
+            <a target="_blank" href="SPtrail.jpeg">
+                <img src="SPtrail.jpeg" alt="Sandpiper Hiking Trail" width="600" height="400">
+            </a>
+        <div class="desc">Sandpiper Hiking Trail in the Winter</div>
+        </div>
+
+        <div class="gallery">
+            <a target="_blank" href="VChikingtrail.jpeg">
+                <img src="VChikingtrail.jpeg" alt="Visitor Center Hiking Trail" width="600" height="400">
+            </a>
+        <div class="desc">Visitor Center Trailhead</div>
+        </div>
+     
+        <div id='map'>
+        <div class="leaflet-control-container">
+                <div class="leaflet-top leaflet-right">
+                    <div class="leaflet-control-layers leaflet-control" aria-haspopup="true"==$0>
+                        <a class="leaflet-control-layers-toggle", href="#" title="Layers">
+                        </a>
+                        <section class="leaflet-control-layers-list">
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id='map'>
+        </div>
+        <!--Sourcing all of my geojson files for layers-->  
+        <script src="https://cjmurray1.github.io/CRP558/geojson/Prairie_Flower_Hiking_Trails.geojson"></script>
+        <script src="https://cjmurray1.github.io/CRP558/geojson/VC_HikingTrail.geojson"></script>
+        <script src="https://cjmurray1.github.io/CRP558/geojson/SandpiperHikingTrail.geojson"></script>
+        <script src="https://cjmurray1.github.io/CRP558/geojson/NST_Mile_Markers.geojson"></script>
+        
+        <script>
+            
+        var map = L.map('map').setView([41.725134, -93.693042], 12);
+        
+        L.tileLayer('https://api.mapbox.com/styles/v1/cjmurray/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'ck9qci9ot3yrn1ipkrjha65bh',
+        accessToken: 'pk.eyJ1IjoiY2ptdXJyYXkiLCJhIjoiY2s2dmZsYzJtMDFjMDNkcWttdmdram9yaSJ9.CBzvTF94o8rvG2lbRPjC-w' 
+        }).addTo(map);
+            
+
+
+            
+            
+        </script>
+      
+    </body>
+</html>
